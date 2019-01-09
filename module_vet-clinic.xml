@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_vet-clinic" default="compile.module.vet-clinic">
+  <dirname property="module.vet-clinic.basedir" file="${ant.file.module_vet-clinic}"/>
+  
+  <property name="module.jdk.home.vet-clinic" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.vet-clinic" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.vet-clinic" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.vet-clinic" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="vet-clinic.output.dir" value="${module.vet-clinic.basedir}/classes/production/vet-clinic"/>
+  <property name="vet-clinic.testoutput.dir" value="${module.vet-clinic.basedir}/classes/test/vet-clinic"/>
+  
+  <path id="vet-clinic.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="vet-clinic.module.production.classpath">
+    <path refid="${module.jdk.classpath.vet-clinic}"/>
+  </path>
+  
+  <path id="vet-clinic.runtime.production.module.classpath">
+    <pathelement location="${vet-clinic.output.dir}"/>
+  </path>
+  
+  <path id="vet-clinic.module.classpath">
+    <path refid="${module.jdk.classpath.vet-clinic}"/>
+    <pathelement location="${vet-clinic.output.dir}"/>
+  </path>
+  
+  <path id="vet-clinic.runtime.module.classpath">
+    <pathelement location="${vet-clinic.testoutput.dir}"/>
+    <pathelement location="${vet-clinic.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.vet-clinic">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.vet-clinic">
+    <patternset refid="excluded.from.module.vet-clinic"/>
+  </patternset>
+  
+  
+  <target name="compile.module.vet-clinic" depends="compile.module.vet-clinic.production,compile.module.vet-clinic.tests" description="Compile module vet-clinic"/>
+  
+  <target name="compile.module.vet-clinic.production" depends="register.custom.compilers" description="Compile module vet-clinic; production classes"/>
+  
+  <target name="compile.module.vet-clinic.tests" depends="register.custom.compilers,compile.module.vet-clinic.production" description="compile module vet-clinic; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.vet-clinic" description="cleanup module">
+    <delete dir="${vet-clinic.output.dir}"/>
+    <delete dir="${vet-clinic.testoutput.dir}"/>
+  </target>
+</project>
