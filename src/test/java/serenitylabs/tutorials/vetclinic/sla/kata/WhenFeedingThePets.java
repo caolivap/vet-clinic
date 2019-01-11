@@ -1,9 +1,11 @@
 package serenitylabs.tutorials.vetclinic.sla.kata;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import serenitylabs.tutorials.vetclinic.APetHotel;
 import serenitylabs.tutorials.vetclinic.collections.katas.PetHotel;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -20,7 +22,7 @@ public class WhenFeedingThePets {
 
         // THEN
         hotel.getPets().forEach(
-                pet -> assertThat(pet.isWellFed(), equalTo(true))
+                pet -> assertThat(pet.isWellFed(), Matchers.equalTo(true))
         );
     }
 }

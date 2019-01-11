@@ -39,24 +39,34 @@ public class Pet {
         double totalEaten = 0.0;
 
         for(Meal meal : mealsGiven) {
-            if ((breed == Breed.Cat) && (meal.getFoodBrand() == PetFood.KittyKat)) {
-                totalEaten = totalEaten + meal.getAmountInGrams();
-            } else if ((breed == Breed.Dog) && (meal.getFoodBrand() == PetFood.FidosFood)) {
-                totalEaten = totalEaten + meal.getAmountInGrams();
-            }
+            totalEaten = getTotalEaten(totalEaten, meal);
         }
         double amountNeeded = 0.0;
+        amountNeeded = getAmountNeeded(amountNeeded);
+
+        return (totalEaten >= amountNeeded);
+    }
+
+    private double getAmountNeeded(double amountNeeded) {
         if (breed == Breed.Cat) {
             amountNeeded = getWeightInKilos() * 10;
         } else if (breed == Breed.Dog) {
             amountNeeded = getWeightInKilos() * 20;
         }
-
-        return (totalEaten >= amountNeeded);
+        return amountNeeded;
     }
 
-    public void feed(double amountInGrams, PetFood foodBrand) {
-        mealsGiven.add(new Meal(amountInGrams, foodBrand));
+    private double getTotalEaten(double totalEaten, Meal meal) {
+        if ((breed == Breed.Cat) && (meal.getFoodBrand() == PetFood.KittyKat)) {
+            totalEaten = totalEaten + meal.getAmountInGrams();
+        } else if ((breed == Breed.Dog) && (meal.getFoodBrand() == PetFood.FidosFood)) {
+            totalEaten = totalEaten + meal.getAmountInGrams();
+        }
+        return totalEaten;
+    }
+
+    public void eat(Meal meal) {
+        mealsGiven.add(meal);
     }
 
     public static class PetBuilder {
