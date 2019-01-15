@@ -2,19 +2,33 @@ package serenitylabs.tutorials.vetclinic.playingball.model;
 
 import static serenitylabs.tutorials.vetclinic.playingball.model.Game.*;
 
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+import javafx.scene.media.AudioClip;
+import javax.naming.NotContextException;
+
 public class Child {
 
+    private PlayTennis playTennis = new PlayTennis();
+
     public void goPlay(Game game) {
-        if (game == Football) {
-            System.out.print("Kick the ball");
-        } else if (game == Tennis) {
-            System.out.print("Serve the ball");
-        } else if (game == Cricket) {
-            System.out.print("Hit the wicket");
-        } else if (game == Handball) {
-            System.out.print("Throw the ball");
-        } else if (game == Hockey) {
-            System.out.print("Hit the ball with the stick");
+        Player gameToPlay = gameCalled(game);
+        gameToPlay.play();
+    }
+
+    private Player gameCalled(Game game) {
+        switch (game){
+            case Football:
+                return new PlayFootball();
+            case Tennis:
+                return new PlayTennis();
+            case Cricket:
+                return new PlayCricket();
+            case Handball:
+                return new PlayHandball();
+            case Hockey:
+                return new PlayHockey();
+             default:
+                 return null;
         }
     }
 }
