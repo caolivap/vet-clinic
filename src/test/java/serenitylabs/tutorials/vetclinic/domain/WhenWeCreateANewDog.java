@@ -40,4 +40,18 @@ public class WhenWeCreateANewDog {
 
     }
 
+    @Test
+    public void a_dog_complains_by_growling(){
+        Dog fido = Dog.called("Fido").ofBreed("Labrador")
+            .andOfColour("Black","White");
+
+        assertThat(fido.complaint(), is(equalTo("Grrrr")));
+    }
+
+    @Test
+    public void a_cat_complains_by_meowing() {
+        Cat felix = Cat.called("Felix").ofBreed("Burmese").andOfColour("Brown");
+
+        assertThat(felix.complaint(), is(equalTo("Meow")));
+    }
 }
